@@ -39,7 +39,7 @@ class _DBDataTableSource extends DataTableSource {
       cells: _data[index].values.map((value) {
         return DataCell(Text(
           "$value",
-          style: TextStyle(color: textColor),
+          style: TextStyle(color: Colors.yellow),
         ));
       }).toList(),
     );
@@ -153,7 +153,7 @@ class _RawQueryPage extends State<RawQueryPage> {
             }).toList(),
             header: Text(
               'Result',
-              style: TextStyle(color: Colors.purple),
+              style: TextStyle(color: Colors.white70),
             ),
             source: _DBDataTableSource(_result!, textColor: Colors.black87),
             rowsPerPage: this.widget.rowsPerPage,
