@@ -1,5 +1,6 @@
 // Gateway widget to view SQLite databases
 import 'package:flutter/material.dart';
+import 'package:persisted_cache/persisted_cache.dart';
 
 import 'cubit/cubit_singleton.dart';
 import 'drift/drift_bridge.dart';
@@ -10,6 +11,8 @@ import 'sqlite_widget.dart';
 const String _defaultRoute = '/sqliteExplorer';
 
 class SqliteScreenWidget extends StatefulWidget {
+  static Future<void> setup() async => await PersistedHive.setup();
+
   /// To allow for Navigator to used named routes, the instance of this widget should include a route name to
   /// be used in place of 'static const route = '/className' that is defined when using snippet templates to
   /// create a StatefulWidget.

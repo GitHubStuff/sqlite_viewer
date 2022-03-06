@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:persisted_cache/persisted_cache.dart';
+import 'package:sqlite_viewer/src/persisted_singleton.dart';
 
 import '../sqlite_viewer.dart';
 
@@ -78,7 +79,7 @@ class _RawQueryPage extends State<RawQueryPage> {
   }
 
   Widget _persistingWidget() {
-    PersistedCubit persistedCubit = Modular.get<PersistedCubit>();
+    PersistedCubit persistedCubit = PersistedSingleton().cubit;
     return BlocBuilder<PersistedCubit, PersistedState>(
         bloc: persistedCubit,
         builder: (context, state) {
