@@ -8,7 +8,7 @@ import 'sqlite_widget.dart';
 
 /// This is the default named for the routes defined in 'routes' of the MaterialApp, it can be overridden calling
 /// SqliteScreenWidget.setRoute(newName).
-const String _defaultRoute = '/sqliteExplorer';
+const String _defaultRoute = '/sqliteViewer';
 
 class SqliteScreenWidget extends StatefulWidget {
   static Future<void> setup() async => await PersistedHive.setup();

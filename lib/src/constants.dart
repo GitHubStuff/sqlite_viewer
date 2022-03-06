@@ -11,6 +11,6 @@ const String tableHeaderColor = '${_prefix}tableHeaderColor';
 const String tableListBackgroundColor = '${_prefix}tableListBackgroundColor';
 const String tableNameColor = '${_prefix}tableNameColor';
 const String tableBackgroundColor = '${_prefix}tableBackgroundColor';
-const String _prefix = 'sqlite_explorer.';
+const String _prefix = 'sqlite_viewer.';
 
 int rawRecordCount(BuildContext context) => 5;
