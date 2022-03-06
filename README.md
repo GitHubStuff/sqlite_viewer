@@ -8,7 +8,7 @@ This is a template for the README.md. Replace the *README.md* with this, and fil
 dependencies:
   sqlite_viewer:
     git:
-      url: https://github.com/GitHubStuff/sqlite_viewer.git
+      url: https://github.com/RAE-Health/sqlite_viewer.git
 ```
 
 ***- OR -***
