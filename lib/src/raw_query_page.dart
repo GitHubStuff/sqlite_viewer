@@ -81,6 +81,11 @@ class _RawQueryPage extends State<RawQueryPage> {
     return BlocBuilder<PersistedCubit, PersistedState>(
         bloc: persistedCubit,
         builder: (context, state) {
+          if (state is PersistedStateNewItem) {
+            Future.delayed(Duration(milliseconds: 100), () {
+              _runQuery(state.newText);
+            });
+          }
           return PersistedWidet();
         });
   }

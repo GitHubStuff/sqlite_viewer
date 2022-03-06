@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as M;
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'drift/drift_bridge.dart';
 import 'raw_query_page.dart';
@@ -67,7 +66,7 @@ class _TablesPageState extends State<TablesPage> {
 
   Widget _body(BuildContext context) {
     return Container(
-      color: Colors.grey,
+      color: Colors.black87, // The backing color
       child: M.Column(
         children: <Widget>[
           Container(
@@ -88,19 +87,6 @@ class _TablesPageState extends State<TablesPage> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: ElevatedButton(
-                    child: Text("Wipe database", style: Theme.of(context).textTheme.button),
-                    onPressed: () {
-                      var path = widget.driftBridge.path;
-                      deleteDatabase(path).then((value) {
-                        streamController.sink.add([]);
-                        widget.driftBridge.close();
-                      });
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: ElevatedButton(
                     onPressed: () {
                       Modular.to.push(
                         MaterialPageRoute(
@@ -113,7 +99,7 @@ class _TablesPageState extends State<TablesPage> {
                         ),
                       );
                     },
-                    child: Text("Query", style: Theme.of(context).textTheme.button),
+                    child: Text('Query', style: Theme.of(context).textTheme.button),
                   ),
                 ),
               ],
@@ -128,12 +114,20 @@ class _TablesPageState extends State<TablesPage> {
                     children: snapshot.data!.map((table) {
                       final String recordCount = (recordCounts[table.name] ?? 0) == 0 ? 'none' : (recordCounts[table.name] ?? 0).toString();
                       return ListTile(
-                        title: Text(table.name,
-                            style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: 28.0,
-                            )),
-                        subtitle: Text('Records: $recordCount'),
+                        title: Text(
+                          table.name,
+                          style: TextStyle(
+                            color: Colors.amber,
+                            fontSize: 28.0,
+                          ),
+                        ),
+                        subtitle: Text(
+                          'Records: $recordCount',
+                          style: TextStyle(
+                            color: Colors.orange,
+                            fontSize: 22.0,
+                          ),
+                        ),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return TablePage(
