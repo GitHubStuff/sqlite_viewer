@@ -20,11 +20,11 @@ class _StructurePageState extends State<StructurePage> {
         Container(
           child: Expanded(
             child: Card(
-              color: Colors.white60,
+              color: Colors.black54,
               child: ListView(
                 children: columns.map((column) {
                   return ListTile(
-                    title: Text(column.trimLeft(), style: TextStyle(color: Colors.white30)),
+                    title: Text(column.trimLeft(), style: TextStyle(color: Colors.amber)),
                   );
                 }).toList(),
               ),

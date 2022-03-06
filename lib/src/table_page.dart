@@ -57,7 +57,7 @@ class _TablePageState extends ObservingStatefulWidget<TablePage> {
       },
       child: SafeArea(
         child: Container(
-          color: Colors.blueGrey,
+          color: Colors.black54,
           child: Column(
             children: <Widget>[
               /// 'Clear table', 'Refresh', 'Structure' buttons
@@ -67,7 +67,7 @@ class _TablePageState extends ObservingStatefulWidget<TablePage> {
                     Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: ElevatedButton(
-                        child: Text("Clear table", style: Theme.of(context).textTheme.button),
+                        child: Text('Clear table', style: Theme.of(context).textTheme.button),
                         onPressed: () {
                           widget.driftBridge.clear(table: widget.tableName).then((value) {
                             _getData();
@@ -78,7 +78,7 @@ class _TablePageState extends ObservingStatefulWidget<TablePage> {
                     Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: ElevatedButton(
-                        child: Text("Refresh", style: Theme.of(context).textTheme.button),
+                        child: Text('Refresh', style: Theme.of(context).textTheme.button),
                         onPressed: () {
                           CubitSingleton().cubit.refresh();
                         },
@@ -87,7 +87,7 @@ class _TablePageState extends ObservingStatefulWidget<TablePage> {
                     Padding(
                       padding: const EdgeInsets.all(2.0),
                       child: ElevatedButton(
-                        child: Text("Structure", style: Theme.of(context).textTheme.button),
+                        child: Text('Structure', style: Theme.of(context).textTheme.button),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) {
                             return StructurePage(sql: widget.sql);
@@ -159,7 +159,7 @@ class _TablePageState extends ObservingStatefulWidget<TablePage> {
                       columns: state.columns,
                       header: Text(
                         widget.tableName,
-                        style: TextStyle(color: Colors.lightGreenAccent, fontSize: 32.0),
+                        style: TextStyle(color: Colors.lightGreenAccent, fontSize: 28.0),
                       ),
                       source: state.dataSource,
                     ),
@@ -184,7 +184,7 @@ class _TablePageState extends ObservingStatefulWidget<TablePage> {
                 .map((value) => Text(
                       value.toString(),
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.orange,
                       ),
                     ))
                 .toList());
@@ -204,7 +204,7 @@ class _TablePageState extends ObservingStatefulWidget<TablePage> {
         var cleanedRows = rows;
         var columnsString = cleanedRows.toString().replaceAll("[{group_concat(name, '|'): ", "").replaceAll("}]", "");
         var column = columnsString.toString().split("|");
-        final columnNameColor = Colors.green[800]!;
+        final columnNameColor = Colors.orange;
         List<DataColumn> columnNames = [];
         columnNames.addAll(column.map((key) {
           return DataColumn(
