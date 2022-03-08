@@ -28,6 +28,7 @@ class TablesPage extends StatefulWidget {
 class _TablesPageState extends State<TablesPage> {
   final streamController = StreamController<List<TableItem>>();
   final Map<String, int> recordCounts = {};
+  Timer? _timer;
 
   @override
   void initState() {
@@ -35,6 +36,24 @@ class _TablesPageState extends State<TablesPage> {
     Future.delayed(Duration(milliseconds: 350), () {
       _getTables();
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (_timer == null) {
+      _timer = Timer.periodic(Duration(seconds: 30), (timer) {
+        _getTables();
+      });
+    }
+    return Scaffold(body: _body(context));
+  }
+
+  @override
+  dispose() {
+    _timer?.cancel();
+    streamController.close();
+    _timer = null;
+    super.dispose();
   }
 
   /// Query 'sqlite_master' to retrieve information about all the tables
@@ -57,11 +76,6 @@ class _TablesPageState extends State<TablesPage> {
     }
 
     streamController.sink.add(tables);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: _body(context));
   }
 
   Widget _body(BuildContext context) {
@@ -110,40 +124,48 @@ class _TablesPageState extends State<TablesPage> {
               stream: streamController.stream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  return ListView(
-                    children: snapshot.data!.map((table) {
-                      final String recordCount = (recordCounts[table.name] ?? 0) == 0 ? 'none' : (recordCounts[table.name] ?? 0).toString();
-                      return ListTile(
-                        title: Text(
-                          table.name,
-                          style: TextStyle(
-                            color: Colors.amber,
-                            fontSize: 28.0,
+                  return RefreshIndicator(
+                    backgroundColor: Colors.deepPurple,
+                    color: Colors.amberAccent,
+                    onRefresh: () {
+                      _getTables();
+                      return Future.delayed(Duration.zero);
+                    },
+                    child: ListView(
+                      children: snapshot.data!.map((table) {
+                        final String recordCount = (recordCounts[table.name] ?? 0) == 0 ? 'none' : (recordCounts[table.name] ?? 0).toString();
+                        return ListTile(
+                          title: Text(
+                            table.name,
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontSize: 28.0,
+                            ),
                           ),
-                        ),
-                        subtitle: Text(
-                          'Records: $recordCount',
-                          style: TextStyle(
-                            color: Colors.orange,
-                            fontSize: 22.0,
+                          subtitle: Text(
+                            'Records: $recordCount',
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 22.0,
+                            ),
                           ),
-                        ),
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                            return TablePage(
-                              tableName: table.name,
-                              driftBridge: widget.driftBridge,
-                              sql: table.sql,
-                              rowsPerPage: widget.rowsPerPage,
-                            );
-                          }));
-                        },
-                        trailing: Icon(
-                          Icons.art_track,
-                          color: Colors.amberAccent,
-                        ),
-                      );
-                    }).toList(),
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                              return TablePage(
+                                tableName: table.name,
+                                driftBridge: widget.driftBridge,
+                                sql: table.sql,
+                                rowsPerPage: widget.rowsPerPage,
+                              );
+                            }));
+                          },
+                          trailing: Icon(
+                            Icons.art_track,
+                            color: Colors.amberAccent,
+                          ),
+                        );
+                      }).toList(),
+                    ),
                   );
                 } else {
                   return Container();
@@ -154,11 +176,5 @@ class _TablesPageState extends State<TablesPage> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    streamController.close();
-    super.dispose();
   }
 }
