@@ -1,15 +1,18 @@
 name: sqlite_viewer
-version: 0.0.1+10
+version: 0.0.1+11
 homepage: http://www.icodeforyou.com
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.16.1 <3.0.0" #Dart SDK 2022-02-18
-  flutter: ">=2.10.2"
+  sdk: ">=2.16.2 <3.0.0" #Dart SDK 2022-04-02
+  flutter: ">=2.10.4"
 
 dependencies:
   cupertino_icons: ^1.0.4
   drift: ^1.4.0
+  extensions_package:
+    git:
+      url: https://github.com/RAE-Health/extensions_package.git
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
@@ -24,10 +27,7 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.3
   sqflite: ^2.0.2
 
-dependency_overrides:
-  extensions_package:
-    git:
-      url: https://github.com/RAE-Health/extensions_package.git
+dependency_overrides: null
 
 dev_dependencies:
   flutter_lints: ^1.0.4

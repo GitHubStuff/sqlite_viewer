@@ -3,9 +3,9 @@ import 'package:extensions_package/extensions_package.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubit/build_cubit.dart';
-import 'cubit/cubit_singleton.dart';
-import 'drift/drift_bridge.dart';
+import '../cubit/build_cubit.dart';
+import '../cubit/cubit_singleton.dart';
+import '../drift/drift_bridge.dart';
 import 'fsm_datasource.dart';
 import 'structure_page.dart';
 

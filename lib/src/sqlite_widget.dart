@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'drift/drift_bridge.dart';
-import 'tables_page.dart';
+import 'db/tables_page.dart';
 
 class SqliteWidget extends StatefulWidget {
   /// If set false the widget is disabled and the icon is not displayed (e.g. in production).

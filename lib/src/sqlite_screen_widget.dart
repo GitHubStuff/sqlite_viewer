@@ -39,7 +39,7 @@ class SqliteScreenWidget extends StatefulWidget {
   /// Call to that defines the SQLite database instance (founding concept is a single Sqlite database file for each app)
   /// This is wrapper for info passed to create/open a sqlite database (name, version, create callback, update callback)
   /// found in the SQLite spec.
-  final DriftBridge driftBridge;
+  final DriftBridge? driftBridge;
 
   SqliteScreenWidget({
     Key? key,
@@ -67,7 +67,7 @@ class _SqliteScreenWidgetState extends State<SqliteScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (!widget.enabled) return widget.parentWidget;
+    if (!widget.enabled || widget.driftBridge == null) return widget.parentWidget;
 
     /// Display the SQLiteWidget when the database has been opened/created and a spinner while the async task for opening/creating
     /// is going on.
@@ -87,7 +87,7 @@ class _SqliteScreenWidgetState extends State<SqliteScreenWidget> {
   /// passed.
   Future<Widget> _getWidget() async {
     return SqliteWidget(
-      database: widget.driftBridge,
+      database: widget.driftBridge!,
       enable: widget.enabled,
       child: widget.parentWidget,
       iconAlignment: Alignment.bottomCenter,

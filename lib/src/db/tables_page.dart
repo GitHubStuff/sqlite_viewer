@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart' as M;
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'drift/drift_bridge.dart';
+import '../drift/drift_bridge.dart';
 import 'raw_query_page.dart';
 import 'table_item.dart';
 import 'table_page.dart';

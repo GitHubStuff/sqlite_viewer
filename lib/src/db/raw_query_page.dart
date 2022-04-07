@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persisted_cache/persisted_cache.dart';
 
-import '../sqlite_viewer.dart';
+import '../../sqlite_viewer.dart';
 
 class RawQueryPage extends StatefulWidget {
   final DriftBridge driftBridge;
