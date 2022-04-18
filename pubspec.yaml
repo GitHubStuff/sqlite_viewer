@@ -1,5 +1,5 @@
 name: sqlite_viewer
-version: 0.0.1+11
+version: 0.0.1+12
 homepage: http://www.icodeforyou.com
 publish_to: 'none'
 
@@ -12,7 +12,7 @@ dependencies:
   drift: ^1.4.0
   extensions_package:
     git:
-      url: https://github.com/RAE-Health/extensions_package.git
+      url: git@github.com:RAE-Health/extensions_package.git
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
@@ -22,7 +22,7 @@ dependencies:
   hive_flutter: ^1.1.0
   persisted_cache:
     git:
-      url: https://github.com/RAE-Health/persisted_cache.git
+      url: git@github.com:RAE-Health/persisted_cache.git
   path_provider: ^2.0.7
   sqlite3_flutter_libs: ^0.5.3
   sqflite: ^2.0.2
